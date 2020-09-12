@@ -9,19 +9,19 @@ class App extends React.Component {
       todos: [//one array
         {//one object inside the array
           task: 'learn what Date.now() does',
-          id: 1528817077286,
+          id: 16268624127,
           completed: false
         },
         {
           task: 'Make a plan for evacuating the city.',
-          id: 1528817084358,
+          id: 19716661230,
           completed: false
         }
       ],
       todo: ''
     };
   }
-  //methods created outside of the constructor
+  //handler functions
   addTodo = event => {
     event.preventDefault();
     const newTodo = {
@@ -35,8 +35,8 @@ class App extends React.Component {
   };
 
   changeTodo = event => this.setState({ [event.target.name]: event.target.value });
-
-  toggleTodoComplete = id => {
+//add functionality to toggle your todo component flag from false to true
+  toggleComplete = id => {
     let todos = this.state.todos.slice();
     todos = todos.map(todo => {
       if (todo.id === id) {
@@ -48,8 +48,8 @@ class App extends React.Component {
     });
     this.setState({ todos });
   };
-
-  clearCompletedTodos = event => {
+//add functionality to clear todos with .filter
+  clearCompleted = event => {
     event.preventDefault();
     let todos = this.state.todos.filter(todo => !todo.completed);
     this.setState({ todos });
@@ -59,14 +59,15 @@ class App extends React.Component {
     return (
         <div>
           <TodoList
-              handleToggleComplete={this.toggleTodoComplete}
+              handleToggleComplete={this.toggleComplete}
               todos={this.state.todos}
           />
+          {//*form will hold input field, and buttons*//}
           <TodoForm
               value={this.state.todo}
               handleTodoChange={this.changeTodo}
               handleAddTodo={this.addTodo}
-              handleClearTodos={this.clearCompletedTodos}
+              handleClearTodos={this.clearCompleted}
           />
         </div>
     );
